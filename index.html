@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Rock Paper Scissors</title>
-        <script src="javascript.js" defer></script>
+       
         <link href="styles.css" rel="stylesheet">
     </head>
     <body>
@@ -10,21 +10,22 @@
         <div id="round"></div>
         <div class="container">
             <div class="score">
-                <div id="pScore"></div>
-                <div id="cScore"></div>
+                <div id="pScore">Player : 0</div>
+                <div id="cScore">Computer : 0</div>
             </div>
             <div class="options">
-                <button id="rock">Rock</button>
-                <div id="paper">Paper</div>
-                <div id="scissors">Scissors</div>
+                <div id="rock" class="box">Rock</div>
+                <div id="paper" class="box">Paper</div>
+                <div id="scissors" class="box">Scissors</div>
             </div>
             <div class="selection">
-                <div id="pSelection"></div>
+                <div id="pSelection">?</div>
                 Vs
-                <div id="cSelection"></div>
+                <div id="cSelection">?</div>
             </div>
             <div class="message" id="message"></div>
             <button id="restart">Restart</button>
         </div>
+        <script src="javascript.js" defer></script>
     </body>
 </html>

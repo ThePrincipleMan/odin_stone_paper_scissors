@@ -1,3 +1,7 @@
+let computerScore = 0;
+let playerScore = 0;
+let roundWinner = '';
+
 function computerSelection(){
     const randomNum = Math.floor(Math.random()*3);
     switch(randomNum){
@@ -10,8 +14,12 @@ function computerSelection(){
     }
 }
 
-function setChoice(choice){
-    playerSelection = choice;
+function setChoice(playerSelection){
+    if(playerScore===5 || computerScore===5){
+        finalMessage();
+        message.textContent = `Round over, restart to play some more`;
+    }
+    round(playerSelection);
 }
 
 function round(ps){
@@ -26,33 +34,33 @@ function round(ps){
         computerScore++;
         roundWinner = 'c';
     }
-    updateScreen(playerScore, computerScore, roundWinner, ps, cs);
+    updateScreen(roundWinner, ps, cs);
 }
 
-function updateScreen(pSco, cSco, winner, ps,cs ){
-    pScore.textContent(`Your score is ${pSco}`);
-    cScore.textContent(`Computer's score is ${cSco}`);
+function updateScreen(winner, ps,cs ){
+    pScore.textContent = `Player : ${playerScore}`;
+    cScore.textContent = `Computer : ${computerScore}`;
     if(winner === 'tie')
-        message.textContent(`Its a tie!`);
+        message.textContent = `Its a tie!`;
     else if(winner === 'c')
-        message.textContent(`Oh no! you lost as ${cs} beats ${ps}`);
+        message.textContent = `Oh no! you lost as ${cs} beats ${ps}`;
     else if(winner === 'p')
-        message.textContent(`Yay!! you won as ${ps} beats ${cs}`);
-    pSelection.textContent(`You chose ${ps}`);
-    cSelection.textContent(`Computer chose ${cs}`);
+        message.textContent = `Yay!! you won as ${ps} beats ${cs}`;
+    pSelection.textContent = `You chose ${ps}`;
+    cSelection.textContent = `Computer chose ${cs}`;
 }
 
-function checkGame(c, p){
-    if(c===5 || p===5)
-        return 0;
-    return 1;
+function isGameOver(){
+    if(computerScore === 5 || playerScore === 5)
+        return true;
+    return false;
 }
 
-function game(){
-    while(checkGame(computerScore, playerScore)){
-        round();
-    }
-    message.textContent(`Round over, restart to play some more`);
+function finalMessage(){
+    if(playerScore>computerScore)
+        message.textContent = `Yay! you won with a margin of ${playerScore-computerScore}`;
+    else    
+        message.textContent = `You lost :( lets not discss the margin`;
 }
 
 function restartGame(){
@@ -63,10 +71,7 @@ function restartGame(){
 }
 
 // user interface
-let computerScore = 0;
-let playerScore = 0;
-let playerSelection = '';
-let roundWinner = '';
+
 
 const rockBtn = document.getElementById('rock');
 const paperBtn = document.getElementById('paper');
@@ -78,7 +83,7 @@ const cSelection = document.getElementById('cSelection');
 const message = document.getElementById('message');
 const restart = document.getElementById('restart');
 
-rockBtn.addEventListener('click', setChoice('rock'));
-paperBtn.addEventListener('click', setChoice('paper'));
-scissorsBtn.addEventListener('click', setChoice('scissors'));
-restart.addEventListener('click', restartGame());
+rockBtn.addEventListener('click', () => setChoice('rock'));
+paperBtn.addEventListener('click', () => setChoice('paper'));
+scissorsBtn.addEventListener('click', () => setChoice('scissors'));
+restart.addEventListener('click', restartGame);
